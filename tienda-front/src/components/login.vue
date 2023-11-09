@@ -5,14 +5,14 @@
                 <div class="row">
                     <div class="col m3">
                         <label>Usuario</label>
-                        <input type="text" v-model="usuario"/>
+                        <input type="text" v-model="username"/>
                     </div> 
                 </div>
             
                 <div class="row">
                     <div class="col m3">
                         <label>Contraseña</label>
-                        <input type="password" v-model="clave"/>
+                        <input type="password" v-model="password"/>
                     </div> 
                 </div>
                 <button class="btn waves-effect waves-light" style="margin-right: 20px; margin-bottom: 20px;" type="submit" name="action">Iniciar sesión
@@ -34,24 +34,24 @@
         name: 'loginUsuario', 
         data(){
             return{
-                usuario:'',
-                clave:'',
+                username:'',
+                password:'',
                 loading: false
             }    
         },
         methods: {
             async iniciarSesion() {
                 var datos = {
-                    usuario: this.usuario,
-                    clave: this.clave,
+                    username: this.username,
+                    password: this.password,
                 };
                 this.loading = true;
                 try {
-                    await this.axios.post('/Login/loginUsuario', datos, {
-                        withCredentials: true,
-                    });
+                    var result = await this.axios.post('/Login', datos);
+                    console.log(result);
                     console.log('¡Conectado correctamente!');
-                    this.$router.push('/TemplateHome');
+                    // isAuthenticated = true;
+                    this.$router.push('/portalUsuario');//cuando devuelve OK redirige al componente 'portalUsuario'
                 } catch (error) {
                     console.error(error); 
                 } finally {

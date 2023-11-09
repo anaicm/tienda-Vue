@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tienda.Models;
 
 namespace Tienda.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UsersController : ControllerBase
@@ -21,14 +21,12 @@ public class UsersController : ControllerBase
         _userManager = userManager;
     }
 
-    //[Authorize] //Protege el metodo con authentication, en este caso por cookies
     [HttpGet]// traer todos los usuarios
     public IActionResult Get()
     {
         return Ok(_userManager.Users);//devuelve los usuarios de la tabla 'aspnet_user' 
     }
 
-    //[Authorize] //Protege el metodo con authentication, en este caso por cookies
     [HttpPost]//añadir registro
     public async Task<ActionResult> Add(AddUserModel userModel)
     {            

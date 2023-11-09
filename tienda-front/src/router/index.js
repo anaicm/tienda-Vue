@@ -25,7 +25,7 @@ const routes = [//se crea un array de rutas
         path: '/portalUsuario',// en las rutas se pueden acceder por la path o por el nombre 
         name: 'portalUsuario',
         component: portalUsuario //al componente que se refiere 
-    },
+    }
    
   
 ];

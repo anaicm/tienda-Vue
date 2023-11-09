@@ -16,16 +16,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //--distinto dominio habilitar las cors-----------------------------------------------------------
-builder.Services.AddCors(options=>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>{
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder
+            .WithOrigins("http://localhost:8080")  // Reemplaza con el origen correcto de tu frontend
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials(); // Habilita las credenciales
     });
-
 });
 // Añadir identity al proyecto usando el usersontext el user y rol por defecto.
+// Añade authentication a la api con los usuarios de la tabla ASPNET_USERS (que son los mapeados de IdentityUser)
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     //restricciones para la contraseña
@@ -38,6 +41,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
   .AddEntityFrameworkStores<UsersContext>()
   .AddDefaultTokenProviders();
 
+//Añado la posibilidad de authencation con Cookies
 builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
 {
   var expireTimeSpanString = "100000";
