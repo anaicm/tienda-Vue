@@ -8,6 +8,7 @@
     </router-link>
   </nav>
   <ul>
+    
     <li class="waves-effect waves-light btn white-text" style="margin-right: 20px;">
       <router-link to="/loginUsuario" style="color: white;">Login</router-link>
     </li>
@@ -16,7 +17,16 @@
     </li>
   </ul>
 
- 
+  <!--Para la autenticacion se realiza igual mediante storage creado en el login, 
+    en este caso si es True me muestra el contenedor con las credencial del usuario-->
+  <div class="container" v-if="$store.state.isAuthenticated">
+    <div>
+        <label>Usuario: {{$store.state.userName }}</label><!--llama a la funcion que contiene el nombre del usuario en localstore-->
+    </div>
+    <div>
+        <label>ID: {{ $store.state.id}}</label><!--llama a la funcion que contiene el id del usuario en localstore-->
+    </div>
+  </div>
 
   
  </div>
@@ -31,7 +41,24 @@
 export default {
   name: 'App',
   
-}
+  /*
+  methods: {
+   
+        usuario() {//devuelve el valor que contiene el nombre del usuario en localStore
+         
+            return localStorage.getItem('userName');
+        },
+        id() {//devuelve el valor que contiene el id del usuario en localStore
+            return localStorage.getItem('id');
+        }, 
+        isAuthenticated(){
+          return localStorage.getItem('isAuthenticated') == 'S';
+        } 
+        },
+    */
+ //En vez de tener los valores aquí creados, directamente se pueden traer de storage
+  }
+
 </script>
 
 

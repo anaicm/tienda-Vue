@@ -24,7 +24,7 @@ public class LoginController : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpPost]//añadir registro
+    [HttpPost]//login
     public async Task<ActionResult> Login(LoginModel loginModel)
     {    
     var authResult = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, isPersistent: true, lockoutOnFailure: true);
@@ -36,6 +36,8 @@ public class LoginController : ControllerBase
 
     if (authResult == SignInResult.Success)
     {
+      //cuando ya esta logado el usuario, busco al usuario por el userName que viene por parametro de hacer 
+      //el login y devuelve la respuesta en formato json.
       var user = await _userManager.FindByNameAsync(loginModel.Username);
       //habría que generar el token (PEROOOOO como lo estamos haciendo con cookies, se generea automagicamente sola)
       return Ok(new {
