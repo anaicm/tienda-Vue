@@ -41,7 +41,7 @@ public class UsersController : ControllerBase
 
         if(userModel.Password != null) {
             //CreateAsync() => Crea el usuario y realiza el hash a la password
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var result = await _userManager.CreateAsync(user, userModel.Password);//CreateAsync()=> comprueba las reglas de la contraseña 
             if (result.Succeeded)
             {
                 return Ok(); // Devuelve un Ok del elemento

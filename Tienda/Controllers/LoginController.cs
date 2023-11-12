@@ -31,7 +31,7 @@ public class LoginController : ControllerBase
     
     if (authResult == SignInResult.TwoFactorRequired)
     {
-      return BadRequest();
+      return BadRequest();//devuelve un 400 porque falla algo 
     }
 
     if (authResult == SignInResult.Success)
