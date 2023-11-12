@@ -24,11 +24,10 @@
                 <i class="material-icons right">send</i>
             </button> 
         </div>
-        <!--1=> añadir el div para mostrar login-->
+        <!--1=> añadir el div para mostrar loading-->
         <div v-show="loading" class="progress">
             <div class="indeterminate"></div>
-        </div>
-           
+        </div>       
     </div>
 </template>
 
