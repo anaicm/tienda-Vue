@@ -13,7 +13,9 @@
       <router-link to="/loginUsuario" style="color: white;">Login</router-link>
     </li>
     <li class="waves-effect waves-light btn white-text" style="margin-right: 20px;">
-      <router-link to="/addUsuario" style="color: white;">Añadir Usuario</router-link>
+      <router-link to="/addUsuario" style="color: white;">Añadir Usuario
+        <i class="material-icons" style="margin-left: 10px;">add_circles</i>
+      </router-link>
     </li>
   </ul>
 
