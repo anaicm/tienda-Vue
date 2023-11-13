@@ -44,6 +44,7 @@ public class LoginController : ControllerBase
         permissions = "Admin", 
         userData = new {
           userName = loginModel.Username,
+          email = user?.Email,
           id = user?.Id}
       }); //En esta respuesta ok 200 se verá como viene la cookie ya en el inspeccionar y los datos del usuario
     }
@@ -55,7 +56,7 @@ public class LoginController : ControllerBase
 
     return BadRequest();
     }
-
+//------------------------------------------------------------------------------------------------------------------------------------
     [Authorize]//si esta autorizado (tiene cookie creada)
     [HttpPost("Logout")]//añadir registro
     public async Task<ActionResult> Logout()

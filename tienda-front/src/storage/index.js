@@ -16,6 +16,9 @@ const storage = createStore({//variables para guardar el valor
         setUsername(state,userName){
             state.userName = userName;
         },
+        setEmail(state,email){
+            state.email = email;
+        }, 
         setId(state,id){
             state.id = id;
         }, 
@@ -24,6 +27,7 @@ const storage = createStore({//variables para guardar el valor
             //si hay token hay que borrarlo pero como en este caso es una cookies esta ya viene sola
             state.userName = '';//el nombre del usuario se elimina 
             state.id = null;//el id del usuario se elimina
+            state.email = '';//el id del usuario se elimina
             router.push('/loginUsuario')//redirige al componente login para que se vuelva a logar 
         }
     },

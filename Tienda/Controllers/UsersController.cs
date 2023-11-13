@@ -20,12 +20,13 @@ public class UsersController : ControllerBase
         _logger = logger;
         _userManager = userManager;
     }
-
+//--------------------------------------------------------------------------------------------------------------------------------------
     [HttpGet]// traer todos los usuarios
     public IActionResult Get()
     {
         return Ok(_userManager.Users);//devuelve los usuarios de la tabla 'aspnet_user' 
     }
+//--------------------------------------------------------------------------------------------------------------------------------------
 
     [HttpPost]//añadir registro
     public async Task<ActionResult> Add(AddUserModel userModel)
@@ -54,6 +55,36 @@ public class UsersController : ControllerBase
         }
 
         return BadRequest();    
-    }    
+    } 
+//--------------------------------------------------------------------------------------------------------------------------------------
+   [HttpPut("{id}")] // Actualizar usuario por ID
+    public async Task<ActionResult> Update(string id, EditUserModel userModel)
+{
+    // Buscar el usuario por su ID
+    var user = await _userManager.FindByIdAsync(id);
+
+    if (user == null)
+    {
+        return NotFound(); // Usuario no encontrado
+    }
+
+    // Actualizar propiedades del usuario
+    user.UserName = userModel.Username;
+    user.Email = userModel.Email;
+    // UpdateAsync() => Actualiza las propiedades del usuario en la base de datos
+    var result = await _userManager.UpdateAsync(user);
+
+    if (result.Succeeded)
+    {
+        return Ok(); // Devuelve un Ok del elemento
+    }
+    else
+    {
+        // Manejar errores aquí si es necesario
+        return BadRequest(result.Errors);
+    }
+}
+//---------------------------------eliminar usuario
+
 }
 
