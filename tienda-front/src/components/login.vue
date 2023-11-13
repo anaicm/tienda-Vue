@@ -53,6 +53,7 @@
                     //localStorage.setItem('id', result.data.userData.id);//guarda el id del usuario
                     this.$store.commit('setAuthenticated', true);//llama a la funcion de store para ver si esta autenticado
                     this.$store.commit('setUsername', result.data.userData.userName);//llama a la funcion de store
+                    this.$store.commit('setEmail', result.data.userData.email);//llama a la funcion de store
                     this.$store.commit('setId', result.data.userData.id);//llama a la funcion de store
                     // isAuthenticated = true;
                     this.$router.push('/portalUsuario');//cuando devuelve OK redirige al componente 'portalUsuario'

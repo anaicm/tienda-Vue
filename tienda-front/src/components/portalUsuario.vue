@@ -24,30 +24,51 @@
         <tbody>
           <tr v-for="usuario in usuarios" :key="usuario.id">
             <td>{{ usuario.id }}</td>
-            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.userName }}</td>
             <td>{{ usuario.email }}</td>
-            <td class="center"><a href="#!" class="material-icons">edit</a></td>
-            <td class="center"><a href="#!" class="material-icons">delete</a></td>
+            <td class="center" @click="abrirModalModificar(usuario)"><i class="material-icons">edit</i></td>
+            <td class="center" @click="EliminarUsuario(usuario)"><i class="material-icons">delete</i></td>
           </tr>
         </tbody>
-      </table>
+    </table>
       
       <!-- Mostrar mensaje si no hay usuarios -->
       <div v-else>
         No hay usuarios para mostrar.
       </div>
     </div>
+      <!--Modal actualizar---------------------------------------->
+      <div id="modalModificar" class="modal">
+        <div class="modal-content">
+          <!-- Inputs para la edición de usuario -->
+          <label for="username">Username:</label>
+          <input type="text" id="username" v-model="usuarioSeleccionado.userName">
+
+          <label for="email">Email:</label>
+          <input type="text" id="email" v-model="usuarioSeleccionado.email">
+        </div>
+        <div class="modal-footer">
+          <!-- Botones para cerrar y guardar cambios -->
+          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+          <a class="modal-close waves-effect waves-green btn-flat" @click="guardarCambios">Guardar Cambios</a>
+        </div>
+      </div>
     </div>
   </template>
   
   <script>
-
+  import M from 'materialize-css'
   export default {
     name: 'portalUsuario',
     data() {
       return {
         usuarios: [],
         isLoading: false,// se inicializa en false para la carga
+        usuarioSeleccionado:{
+          id: -1,
+          userName: '',
+          email: '',
+      },
        
       };
     },
@@ -58,8 +79,43 @@
         } catch (error) {
           console.error('Error al obtener usuarios:', error);
         }
+      },
+
+      abrirModalModificar(usuario) {
+      // Abrir el modal de edición y asignar el usuario seleccionado
+      this.usuarioSeleccionado = {
+        id: usuario.id,
+        userName: usuario.userName,
+        email: usuario.email,
+      };
+      const modal = M.Modal.init(document.getElementById('modalModificar'));
+      modal.open();
+    },
+    async guardarCambios() {
+      // Realizar la solicitud para actualizar el usuario
+      try {
+          const response = await this.axios.put(`/Users/${this.usuarioSeleccionado.id}`, {
+          username: this.usuarioSeleccionado.userName,
+          email: this.usuarioSeleccionado.email,
+        });
+        console.log('Usuario actualizado con éxito:', response);
+       // Buscar y actualizar el usuario en la lista existente
+        const index = this.usuarios.findIndex(user => user.id === this.usuarioSeleccionado.id);
+        if (index !== -1) {
+          // Actualizar el usuario en la lista
+          this.usuarios[index] = {
+            id: this.usuarioSeleccionado.id,
+            userName: this.usuarioSeleccionado.userName,
+            email: this.usuarioSeleccionado.email,
+          };
+        }
+      } catch (error) {
+        console.error('Error al actualizar usuario:', error);
       }
     },
+
+    },
+   
     async mounted() {
       // Realizar la solicitud a la API para obtener los usuarios
       try {

@@ -64,7 +64,7 @@ import axios from 'axios';
           //4- función para parar el loading con un tiempo de vida
           setTimeout(() => {
             this.loading = false; // Detener la carga
-          }, 2000); 
+          }, 1000); 
         } else {
           // Manejar otros casos aquí
           console.error('Error al agregar el usuario');
