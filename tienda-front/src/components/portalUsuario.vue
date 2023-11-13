@@ -27,7 +27,7 @@
             <td>{{ usuario.userName }}</td>
             <td>{{ usuario.email }}</td>
             <td class="center" @click="abrirModalModificar(usuario)"><i class="material-icons">edit</i></td>
-            <td class="center" @click="EliminarUsuario(usuario)"><i class="material-icons">delete</i></td>
+            <td class="center" @click="eliminarUsuario(usuario.id)"><i class="material-icons">delete</i></td>
           </tr>
         </tbody>
     </table>
@@ -90,30 +90,47 @@
       };
       const modal = M.Modal.init(document.getElementById('modalModificar'));
       modal.open();
-    },
-    async guardarCambios() {
-      // Realizar la solicitud para actualizar el usuario
-      try {
-          const response = await this.axios.put(`/Users/${this.usuarioSeleccionado.id}`, {
-          username: this.usuarioSeleccionado.userName,
-          email: this.usuarioSeleccionado.email,
-        });
-        console.log('Usuario actualizado con éxito:', response);
-       // Buscar y actualizar el usuario en la lista existente
-        const index = this.usuarios.findIndex(user => user.id === this.usuarioSeleccionado.id);
-        if (index !== -1) {
-          // Actualizar el usuario en la lista
-          this.usuarios[index] = {
-            id: this.usuarioSeleccionado.id,
-            userName: this.usuarioSeleccionado.userName,
-            email: this.usuarioSeleccionado.email,
-          };
-        }
-      } catch (error) {
-        console.error('Error al actualizar usuario:', error);
-      }
-    },
+      },
 
+      async guardarCambios() {
+        // Realizar la solicitud para actualizar el usuario
+        try {
+            const response = await this.axios.put(`/Users/${this.usuarioSeleccionado.id}`, {
+            username: this.usuarioSeleccionado.userName,
+            email: this.usuarioSeleccionado.email,
+          });
+          console.log('Usuario actualizado con éxito:', response);
+        // Buscar y actualizar el usuario en la lista existente
+          const index = this.usuarios.findIndex(user => user.id === this.usuarioSeleccionado.id);
+          if (index !== -1) {
+            // Actualizar el usuario en la lista
+            this.usuarios[index] = {
+              id: this.usuarioSeleccionado.id,
+              userName: this.usuarioSeleccionado.userName,
+              email: this.usuarioSeleccionado.email,
+            };
+          }
+        } catch (error) {
+          console.error('Error al actualizar usuario:', error);
+        }
+      },
+      async eliminarUsuario(idUsuario) {
+        const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este usuario?');
+        if (!confirmacion) {
+             // El usuario canceló la eliminación
+            return;
+        }
+        // Realizar la solicitud para eliminar el usuario por ID
+        try {
+          const response = await this.axios.delete(`/Users/${idUsuario}`);
+          console.log('Usuario eliminado con éxito:', response);
+          
+          // Filtrar la lista para quitar el usuario eliminado
+          this.usuarios = this.usuarios.filter(user => idUsuario !== user.id);
+        } catch (error) {
+          console.error('Error al eliminar usuario:', error);
+        }
+      },
     },
    
     async mounted() {

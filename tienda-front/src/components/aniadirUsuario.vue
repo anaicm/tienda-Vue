@@ -53,8 +53,7 @@ import axios from 'axios';
           Username: this.usuario,
           Email: this.email,
           Password: this.clave,
-        });
-        
+        });  
         if (response.status === 200) {// Usuario agregado con éxito
           // Limpia el formulario
           this.usuario = "";

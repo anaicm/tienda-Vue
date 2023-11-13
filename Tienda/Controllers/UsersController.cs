@@ -27,7 +27,6 @@ public class UsersController : ControllerBase
         return Ok(_userManager.Users);//devuelve los usuarios de la tabla 'aspnet_user' 
     }
 //--------------------------------------------------------------------------------------------------------------------------------------
-
     [HttpPost]//añadir registro
     public async Task<ActionResult> Add(AddUserModel userModel)
     {            
@@ -39,7 +38,6 @@ public class UsersController : ControllerBase
             UserName = userModel.Username,
             Email = userModel.Email
         };
-
         if(userModel.Password != null) {
             //CreateAsync() => Crea el usuario y realiza el hash a la password
             var result = await _userManager.CreateAsync(user, userModel.Password);//CreateAsync()=> comprueba las reglas de la contraseña 
@@ -53,7 +51,6 @@ public class UsersController : ControllerBase
                 return BadRequest(result.Errors);
             }
         }
-
         return BadRequest();    
     } 
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -85,6 +82,30 @@ public class UsersController : ControllerBase
     }
 }
 //---------------------------------eliminar usuario
+[HttpDelete("{id}")] // Eliminar usuario por ID
+public async Task<ActionResult> Delete(string id)
+{
+    // Buscar el usuario por su ID
+    var user = await _userManager.FindByIdAsync(id);
+
+    if (user == null)
+    {
+        return NotFound(); // Usuario no encontrado
+    }
+    // DeleteAsync() => Elimina el usuario de la base de datos
+    var result = await _userManager.DeleteAsync(user);
+
+    if (result.Succeeded)
+    {
+        return Ok(); // Devuelve un Ok indicando que la eliminación fue exitosa
+    }
+    else
+    {
+        // Manejar errores aquí si es necesario
+        return BadRequest(result.Errors);
+    }
+}
+
 
 }
 
