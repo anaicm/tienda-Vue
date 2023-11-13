@@ -1,7 +1,7 @@
 import {createStore} from 'vuex';//guarda los valores del usuario para poder usarlos mas adelante sin tener que crear métodos
 //cada vez que se quieran llamar
 import VuexPersistence from 'vuex-persist';
-
+//----------------------------------Datos que se guardan para el login-----------------------------------
 const storage = createStore({//variables para guardar el valor
     state: {
         isAuthenticated: false,
@@ -37,6 +37,7 @@ const storage = createStore({//variables para guardar el valor
             storage:window.localStorage//se almacena la información
         }).plugin //al poner la palabra clave plugin se establece como un nuevo plugin
     ]
+    //---------------------------------Acaban los datos guardados para el login-------------------------------------------
 });
 
 export default storage//se importa para llamarlo en el main.js
