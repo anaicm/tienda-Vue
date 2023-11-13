@@ -8,8 +8,8 @@
     </router-link>
   </nav>
   <ul>
-    
-    <li class="waves-effect waves-light btn white-text" style="margin-right: 20px;">
+    <!--si el usuario está autenticado el botón del login se oculta-->
+    <li v-if="!$store.state.isAuthenticated" class="waves-effect waves-light btn white-text" style="margin-right: 20px;">
       <router-link to="/loginUsuario" style="color: white;">Login</router-link>
     </li>
     <li class="waves-effect waves-light btn white-text" style="margin-right: 20px;">

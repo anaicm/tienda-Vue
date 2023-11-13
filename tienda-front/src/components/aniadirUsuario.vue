@@ -71,6 +71,7 @@ import axios from 'axios';
       } catch (error) {
         // Manejar errores de la solicitud
         console.error('Error al hacer la solicitud:', error);
+        this.loading=false;
       }
     },
   },
