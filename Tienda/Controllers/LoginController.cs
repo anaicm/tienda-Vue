@@ -26,7 +26,7 @@ public class LoginController : ControllerBase
 
     [HttpPost]//login
     public async Task<ActionResult> Login(LoginModel loginModel)
-    {    
+    {
     var authResult = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, isPersistent: true, lockoutOnFailure: true);
     
     if (authResult == SignInResult.TwoFactorRequired)
