@@ -2,13 +2,13 @@
     <div class="container" style="margin-top: 100px;">
         <div class="clo m12 card-panel">
             <form @submit.prevent="iniciarSesion"> 
-                <div class="row">
-                    <div class="col m3">
-                        <label>Usuario</label>
-                        <input type="text" v-model="username"/>
-                    </div> 
-                </div>
-            
+                <a class="btn-floating btn-large waves-effect waves-light right" href="" @click="cerrarLogin()"><i class="material-icons">close</i></a>
+            <div class="row">   
+                <div class="col m3">
+                    <label>Usuario</label>
+                    <input type="text" v-model="username"/>
+                </div> 
+            </div>
                 <div class="row">
                     <div class="col m3">
                         <label>Contraseña</label>
@@ -18,11 +18,6 @@
                 <button class="btn waves-effect waves-light" style="margin-right: 20px; margin-bottom: 20px;" type="submit" name="action">Iniciar sesión
                     <i class="material-icons right">send</i>
                 </button> 
-                <button class="btn waves-effect waves-light" v-show="!loading" style="margin-right: 20px;" type="submit" name="action">
-                    <router-link to="/addUsuario" style="color: white;">Añadir Usuario
-                        <i class="material-icons right">send</i>
-                    </router-link>    
-                </button>
             </form>
         </div>       
     </div>
@@ -62,8 +57,15 @@
                 } finally {
                 this.loading = false;
             }
+            },
+            cerrarLogin() {
+             // Redirecciona a la página de inicio
+                this.$router.push('/');
             }
         },
+       
+
+       
     }
 
 </script>

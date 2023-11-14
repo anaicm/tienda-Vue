@@ -1,6 +1,8 @@
 <template>
     <div class="container" style="margin-top: 100px;">
         <div class="clo m12 card-panel">
+          <a class="btn-floating btn-large waves-effect waves-light right" href="" @click="cerrarAddUsuario()"><i class="material-icons">close</i></a>
+
             <div class="row">
                 <div class="col m3">
                     <label>Usuario</label>
@@ -74,6 +76,16 @@ import axios from 'axios';
         this.loading=false;
       }
     },
+    cerrarAddUsuario() {
+       // Verifica si el usuario está autenticado
+      if (this.$store.state.isAuthenticated) {
+        // Redirige al portal del usuario
+        this.$router.push('/portalUsuario');
+      } else {
+        // Redirige al inicio
+        this.$router.push('/');
+      }
+    }
   },
 }
 

@@ -5,8 +5,8 @@
       <!--Si esta autenticado saldra el boton para cerrar sesion-->
       <button class="btn waves-effect waves-light" v-show="!loading" style="margin-right: 20px;" type="submit" name="action"
       v-if="$store.state.isAuthenticated" @click="$store.commit('logout', $router);cerrarSesion();">
-          Cerrar sesión
-          <i class="material-icons right">send</i>       
+          Cerrar sesiónd
+          <i class="material-icons right">send</i>    
       </button>
       <div class="progress" v-show="isLoading"><!--Se va a mostrar cuando este cargando los datos-->
         <div class="indeterminate"></div>
