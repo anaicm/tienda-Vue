@@ -1,12 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Tienda;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 //Añadir contextos (acceso a base de datos)
 builder.Services.AddDbContext<UsersContext>
+(options=>options.UseSqlServer
+(@"Data Source=PORTATIL\SQLEXPRESS;Initial Catalog=Tienda;User Id=sa;Password=rootadmin;Encrypt=false"));
+
+builder.Services.AddDbContext<TiendaContext>
 (options=>options.UseSqlServer
 (@"Data Source=PORTATIL\SQLEXPRESS;Initial Catalog=Tienda;User Id=sa;Password=rootadmin;Encrypt=false"));
 //---------------------------------------------------------------------------

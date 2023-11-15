@@ -1,13 +1,9 @@
 <template>
     <div>
     <div>
-      <h2>Este es el portal del usuario</h2>
-      <!--Si esta autenticado saldra el boton para cerrar sesion-->
-      <button class="btn waves-effect waves-light" v-show="!loading" style="margin-right: 20px;" type="submit" name="action"
-      v-if="$store.state.isAuthenticated" @click="$store.commit('logout', $router);cerrarSesion();">
-          Cerrar sesiónd
-          <i class="material-icons right">send</i>    
-      </button>
+      <h2>
+        portal de mantenimiento de usuarios
+      </h2>
       <div class="progress" v-show="isLoading"><!--Se va a mostrar cuando este cargando los datos-->
         <div class="indeterminate"></div>
       </div>
@@ -73,14 +69,6 @@
       };
     },
     methods:{
-      cerrarSesion(){//cerrar sesion en el back
-        try {
-        this.axios.post('/Login/logout');
-        } catch (error) {
-          console.error('Error al obtener usuarios:', error);
-        }
-      },
-
       abrirModalModificar(usuario) {
       // Abrir el modal de edición y asignar el usuario seleccionado
       this.usuarioSeleccionado = {

@@ -3,6 +3,7 @@ import addUsuario from '../components/aniadirUsuario.vue';//componente usuario
 import App from '../App.vue';
 import loginUsuario from '../components/login.vue'
 import portalUsuario from '../components/portalUsuario.vue'
+import portalCliente from '../components/PortalCliente.vue'
 
 const routes = [//se crea un array de rutas 
     
@@ -25,6 +26,11 @@ const routes = [//se crea un array de rutas
         path: '/portalUsuario',// en las rutas se pueden acceder por la path o por el nombre 
         name: 'portalUsuario',
         component: portalUsuario //al componente que se refiere 
+    },
+    {
+        path: '/portalCliente',// en las rutas se pueden acceder por la path o por el nombre 
+        name: 'portalCliente',
+        component: portalCliente //al componente que se refiere 
     }
    
   
