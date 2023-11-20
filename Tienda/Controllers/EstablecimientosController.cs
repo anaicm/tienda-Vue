@@ -7,14 +7,14 @@ namespace Tienda.Controllers;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class TiendaController : ControllerBase
+public class EstablecimientosController : ControllerBase
 {
-    private readonly ILogger<UsersController> _logger;//por defecto
+    private readonly ILogger<EstablecimientosController> _logger;//por defecto
     //userManager => Realiza el CRUD de los usuarios
     private readonly TiendaContext _tiendaContext;//usuarios
 
-    public TiendaController(
-        ILogger<UsersController> logger,
+    public EstablecimientosController(
+        ILogger<EstablecimientosController> logger,
         TiendaContext tiendaContext)
     {
         _logger = logger;
@@ -64,6 +64,17 @@ public class TiendaController : ControllerBase
         return NoContent();//devuelve un ok del elemento
 
     }
+//---------Obtener los establecimientos según el id de usuario--------------------------------------
+[HttpGet("{idUsuario}")]
+public IActionResult GetEstablecimientosPorUsuarioId(string idUsuario)
+{
+  //Obtener los establecimientos del usuario
+  var establecimientos = _tiendaContext.Establecimientos
+    .Where(e => e.Usuario_id != null && e.Usuario_id == idUsuario)
+    .ToList();
 
+  //Devolver los establecimientos
+  return Ok(establecimientos);
+}
 }
 

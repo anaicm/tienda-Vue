@@ -6,7 +6,8 @@ const storage = createStore({//variables para guardar el valor
     state: {
         isAuthenticated: false,
         userName: '',
-        id:''
+        id:'',
+        idUsuarioSeleccionado:''
     },
     // mutaciónes métodos que cambia los valores de los estados
     mutations: {
@@ -29,7 +30,11 @@ const storage = createStore({//variables para guardar el valor
             state.id = null;//el id del usuario se elimina
             state.email = '';//el id del usuario se elimina
             router.push('/loginUsuario')//redirige al componente login para que se vuelva a logar 
+        },
+        setAdminUsuarioSeleccionado(state, id){
+            state.idUsuarioSeleccionado = id;
         }
+
     },
     //es storage acepta plugins para definir el localStorage
     plugins:[

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Tienda;
+﻿namespace Tienda;
 
 public partial class Venta
 {
@@ -11,7 +8,7 @@ public partial class Venta
 
     public int? ProductoId { get; set; }
 
-    public string? UsuarioId { get; set; }
+    public string? Usuario_id { get; set; }
 
     public int? Cantidad { get; set; }
 
@@ -21,5 +18,4 @@ public partial class Venta
 
     public virtual Establecimiento? Tienda { get; set; }
 
-    public virtual AspNetUser? Usuario { get; set; }
 }

@@ -45,21 +45,6 @@
               style="margin-right: 20px"
               name="action"
               v-if="$store.state.isAuthenticated"
-            >
-              <router-link to="/portalCliente" style="color: white"
-                >Portal Cliente
-                <i class="material-icons" style="margin-left: 10px"
-                  >add_circles</i
-                >
-              </router-link>
-            </li>
-            <!--si el usuario no esta logado no sale el botón cerrar sesión-->
-            <li
-              class="btn waves-effect waves-light"
-              v-show="!loading"
-              style="margin-right: 20px"
-              name="action"
-              v-if="$store.state.isAuthenticated"
               @click="
                 $store.commit('logout', $router);
                 cerrarSesion();

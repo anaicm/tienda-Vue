@@ -64,5 +64,19 @@ public async Task<IActionResult> Update(Venta venta)
         return NoContent();//devuelve un ok del elemento
        
     }
+//-----------ProductosVentas-----------------------------------
+[HttpGet("{id}/producto-ventas")]
+public IActionResult ProductoVentas(int id)
+{
+    var venta = _tiendaContext.Ventas.Find(id);
+    if (venta == null)
+    {
+        return NotFound();
+    }
+
+    var productoVentas = _tiendaContext.ProductosVentas.Where(pv => pv.VentaId == id).ToList();
+
+    return Ok(productoVentas);
+}
 }
 

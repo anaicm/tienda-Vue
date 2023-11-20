@@ -13,9 +13,9 @@ public partial class Establecimiento
 
     public string? Telefono { get; set; }
 
-    public string? UsuarioId { get; set; }
+    public string? Usuario_id { get; set; }
 
-    public virtual AspNetUser? Usuario { get; set; }
+    public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
 
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }
