@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!--<div>-->
     <div class="container">
       <nav>
         <div class="nav-wrapper">
@@ -57,17 +57,17 @@
       </nav>
       <!--Para la autenticacion se realiza igual mediante storage creado en el login, 
     en este caso si es True me muestra el contenedor con las credencial del usuario-->
-      <div class="container" v-if="$store.state.isAuthenticated">
+      <!--<div class="container" v-if="$store.state.isAuthenticated">
         <div>
-          <label>Usuario: {{ $store.state.userName }}</label
-          ><!--llama a la funcion que contiene el nombre del usuario en localstore-->
-        </div>
+          <label>Usuario: {{ $store.state.userName }}</label>-->
+          <!--llama a la funcion que contiene el nombre del usuario en localstore-->
+        <!--</div>
         <div>
-          <label>ID: {{ $store.state.id }}</label
-          ><!--llama a la funcion que contiene el id del usuario en localstore-->
-        </div>
+          <label>ID: {{ $store.state.id }}</label>-->
+          <!--llama a la funcion que contiene el id del usuario en localstore-->
+        <!--</div>
       </div>
-    </div>
+    </div>-->
     <!----------------------------------------------------------------------------->
     <div class="container">
       <Router-view></Router-view>

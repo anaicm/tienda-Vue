@@ -125,7 +125,15 @@ export default {
       modal.open();
     },
     async guardarCambios() {
+      //cambios para añadir un nuevo establecimiento
       // Enviar los datos del establecimiento a la API
+      const confirmacion = window.confirm(
+        "Se va a añadir un nuevo establecimiento, ¿Estás seguro?"
+      );
+      if (!confirmacion) {
+        // El usuario canceló la eliminación
+        return;
+      }
       const establecimiento = {
         nombre: this.nombre,
         direccion: this.direccion,
@@ -137,8 +145,9 @@ export default {
         establecimiento
       );
       // Si la creación se realizó correctamente, cerrar el modal
-      if (response.status === 201) {
-        console.log('Se ha guardado correctamente')
+      if (response.status === 200) {
+        console.log("Se ha guardado correctamente");
+          this.establecimientos.push(response.data);//añade el nuevo registro a la tabla y lo muestra
       }
     },
     async guardarCambiosActualizar() {
@@ -162,7 +171,7 @@ export default {
             telefono: this.establecimientoSeleccionado.telefono,
           };
         }
-        this.$forceUpdate(); //recarga la página al actualiza
+       
       } catch (error) {
         console.error("Error al actualizar usuario:", error);
       }
@@ -186,6 +195,7 @@ export default {
         // El usuario canceló la eliminación
         return;
       }
+
       // Realizar la solicitud para eliminar el usuario por ID
       try {
         const response = await this.axios.delete(
@@ -194,21 +204,15 @@ export default {
         console.log("Usuario eliminado con éxito:", response);
 
         // Filtrar la lista para quitar el usuario eliminado
-        this.establecimiento = this.establecimiento.filter(
+        this.establecimientos = this.establecimientos.filter(
           (user) => idEstablecimiento !== user.id
         );
-        // Actualizar la tabla
-        if (this.$refs.table !== null) {
-          this.$refs.table.refresh();
-        } else {
-          console.log("El elemento table no existe");
-        }
-        //-----
+      
       } catch (error) {
         console.error("Error al eliminar usuario:", error);
       }
     },
-  }, //----------------------fin del metodod
+  }, //----------------------fin del metodo
   async mounted() {
     try {
       //this.isLoading = true; //cuando empieza a cargar los datos se pone en true
