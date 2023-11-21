@@ -39,6 +39,14 @@
         </tbody>
       </table>
     </div>
+    <!--Botón para volver al componente portal usuario ---------------------------------------->
+    <div
+        class="waves-effect waves-light btn white-text"
+        style="margin-right: 20px"
+        @click="volverPortalUsuario">
+        volver
+        <i class="material-icons" style="margin-left: 10px">arrow_back</i>
+      </div>
     <!--Modal añadir  tienda ---------------------------------------->
     <div id="modalAniadirEstablecimiento" class="modal">
       <div class="modal-content">
@@ -119,8 +127,10 @@ export default {
     };
   },
   methods: {
+    volverPortalUsuario(){
+      this.$router.push(`/portalUsuario`)
+    },
     mostrarUsuario(){
-      alert(this.$store.state.nameUsuarioSeleccionado);
       return this.$store.state.nameUsuarioSeleccionado;
     },
     abrirModalAniadirEstablecimiento() {

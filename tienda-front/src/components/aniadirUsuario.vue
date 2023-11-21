@@ -78,6 +78,7 @@ export default {
           setTimeout(() => {
             this.loading = false; // Detener la carga
           }, 1000);
+          this.$router.push("/loginUsuario");
         } else {
           // Manejar otros casos aquí
           console.error("Error al agregar el usuario");
