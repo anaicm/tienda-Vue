@@ -7,7 +7,8 @@ const storage = createStore({//variables para guardar el valor
         isAuthenticated: false,
         userName: '',
         id:'',
-        idUsuarioSeleccionado:''
+        idUsuarioSeleccionado:'',
+        nameUsuarioSeleccionado:''
     },
     // mutaciónes métodos que cambia los valores de los estados
     mutations: {
@@ -33,6 +34,9 @@ const storage = createStore({//variables para guardar el valor
         },
         setAdminUsuarioSeleccionado(state, id){
             state.idUsuarioSeleccionado = id;
+        },
+        setNameUsuarioSeleccionado(state, userName){
+            state.nameUsuarioSeleccionado = userName;
         }
 
     },

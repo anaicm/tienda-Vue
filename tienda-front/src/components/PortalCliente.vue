@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Bienvenid@ 'Usuario'</h3>
+    <h3>Bienvenid@ {{ mostrarUsuario() }}</h3>
     <div class="">
       <div
         class="waves-effect waves-light btn white-text"
@@ -105,6 +105,7 @@ export default {
   data() {
     return {
       idUsuarioSeleccionado: this.$store.state.idUsuarioSeleccionado,
+      //nameUsuarioSeleccionado: this.$store.state.nameUsuarioSeleccionado, 
       nombre: "",
       direccion: "",
       telefono: "",
@@ -118,6 +119,10 @@ export default {
     };
   },
   methods: {
+    mostrarUsuario(){
+      alert(this.$store.state.nameUsuarioSeleccionado);
+      return this.$store.state.nameUsuarioSeleccionado;
+    },
     abrirModalAniadirEstablecimiento() {
       const modal = M.Modal.init(
         document.getElementById("modalAniadirEstablecimiento")

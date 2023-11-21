@@ -93,6 +93,7 @@ export default {
     },
     abrirPortalEstablecimineto(componente, usuario) {//función generica para cuando hace click que navege al componente
       // Redireccionar al componente especificado
+      this.$store.commit("setNameUsuarioSeleccionado", usuario.userName);
       this.$store.commit("setAdminUsuarioSeleccionado", usuario.id);//guarda el id del usuario que hace clic
       this.$router.push(`/${componente}`);
     },
