@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tienda.Models;
 
 namespace Tienda.Controllers;
-[Authorize]
+
 [ApiController]
 [Route("[controller]")]
 public class UsersController : ControllerBase
@@ -21,6 +21,7 @@ public class UsersController : ControllerBase
         _userManager = userManager;
     }
 //--------------------------------------------------------------------------------------------------------------------------------------
+    [Authorize]
     [HttpGet]// traer todos los usuarios
     public IActionResult Get()
     {
@@ -43,7 +44,7 @@ public class UsersController : ControllerBase
             var result = await _userManager.CreateAsync(user, userModel.Password);//CreateAsync()=> comprueba las reglas de la contraseña 
             if (result.Succeeded)
             {
-                return Ok(); // Devuelve un Ok del elemento
+                return Ok(user); // Devuelve un Ok del elemento
             }
             else
             {
@@ -54,6 +55,7 @@ public class UsersController : ControllerBase
         return BadRequest();    
     } 
 //--------------------------------------------------------------------------------------------------------------------------------------
+   [Authorize]
    [HttpPut("{id}")] // Actualizar usuario por ID
     public async Task<ActionResult> Update(string id, EditUserModel userModel)
 {
@@ -82,6 +84,7 @@ public class UsersController : ControllerBase
     }
 }
 //---------------------------------eliminar usuario
+[Authorize]
 [HttpDelete("{id}")] // Eliminar usuario por ID
 public async Task<ActionResult> Delete(string id)
 {
